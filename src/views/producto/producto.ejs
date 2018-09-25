@@ -1,20 +1,21 @@
 <% include ../partials/_header %>
 <div class="container">
     <header class="text-center">
-            <h3>Producto</h3>
+        <h3>Producto</h3>
     </header>
-    <form action= 
-    <%if(producto.codigo != null) {%>
-        "/producto/edit/<%= producto._id %>" 
-      <%}else{%>
-        "/producto/add" 
-    <%}%>
-    method="post">
+    <form action=<%if(producto.codigo !=null) {%>
+        "/producto/edit/
+        <%= producto._id %>"
+        <%}else{%>
+        "/producto/add"
+        <%}%>
+        method="post">
         <div class="form-group">
             <div class="row">
                 <div class="col-sm">
                     <label>Código</label>
-                    <input type="number" min="0" max="99999" class="form-control" name="codigo" placeholder="Código" value="<%=producto.codigo%>">
+                    <input type="number" min="0" max="99999" class="form-control" name="codigo" placeholder="Código"
+                        value="<%=producto.codigo%>">
                 </div>
                 <div class="col-sm">
                     <label>Alta</label>
@@ -32,48 +33,60 @@
 
         <div class="form-group">
             <div class="row">
-                <div class="col-sm">    
+                <div class="col-sm">
                     <label>Tamaño</label>
                     <select class="form-control input-sm" id="cmbTamanios" name="tamanioId">
-                        <% if(producto.tamanioId == null){ %>    
-                            <option value="-1">Seleccione...</option>
+                        <% if(producto.tamanioId == null){ %>
+                        <option value="-1">Seleccione...</option>
                         <% }else{ %>
-                            <option value="<%=producto.tamanioId%>"><%=producto.tamanio%></option>
+                        <option value="<%=producto.tamanioId%>">
+                            <%=producto.tamanio%>
+                        </option>
                         <% } %>
                         <% for(var i=0; i < tamanios.length; i++) { %>
-                            <option value="<%= tamanios[i]._id %>"><%= tamanios[i].tamanio %></option>
+                        <option value="<%= tamanios[i]._id %>">
+                            <%= tamanios[i].tamanio %>
+                        </option>
                         <% } %>
                     </select>
                 </div>
                 <div class="col-sm">
                     <label>Color</label>
                     <select class="form-control input-sm" id="cmbColores" name="colorId">
-                        <% if(producto.colorId == null){ %>    
-                            <option value="-1">Seleccione...</option>
+                        <% if(producto.colorId == null){ %>
+                        <option value="-1">Seleccione...</option>
                         <% }else{ %>
-                            <option value="<%=producto.colorId%>"><%=producto.color%></option>
+                        <option value="<%=producto.colorId%>">
+                            <%=producto.color%>
+                        </option>
                         <% } %>
                         <% for(var i=0; i < colores.length; i++) { %>
-                            <option value="<%= colores[i]._id %>"><%= colores[i].color %></option>
+                        <option value="<%= colores[i]._id %>">
+                            <%= colores[i].color %>
+                        </option>
                         <% } %>
                     </select>
                 </div>
                 <div class="col-sm">
                     <label>Tipo</label>
                     <select class="form-control input-sm" id="cmbTipos" name="tipoId">
-                        <% if(producto.tipoId == null){ %>    
-                            <option value="-1">Seleccione...</option>
+                        <% if(producto.tipoId == null){ %>
+                        <option value="-1">Seleccione...</option>
                         <% }else{ %>
-                            <option value="<%=producto.tipoId%>" selected="selected"><%=producto.tipo%></option>
+                        <option value="<%=producto.tipoId%>" selected="selected">
+                            <%=producto.tipo%>
+                        </option>
                         <% } %>
                         <% for(var i=0; i < tipos.length; i++) { %>
-                            <option value="<%= tipos[i]._id %>"><%= tipos[i].tipo %></option>
+                        <option value="<%= tipos[i]._id %>">
+                            <%= tipos[i].tipo %>
+                        </option>
                         <% } %>
                     </select>
                 </div>
             </div>
         </div>
-        
+
         <div class="form-group">
             <label>Detalle</label>
             <input type="text" class="form-control" id="txtDetalle" placeholder="Detalle" name="detalle" value="<%=producto.detalle%>">
@@ -83,23 +96,27 @@
             <div class="row">
                 <div class="col-sm">
                     <label>Precio Osaina</label>
-                    <input type="number" min="0" max="99999" class="form-control" id="txtPrecioOsaina" placeholder="Precio Osaina" name="precioOsaina" value="<%=producto.precioOsaina%>">
+                    <input type="number" min="0" max="99999" class="form-control" id="txtPrecioOsaina" placeholder="Precio Osaina"
+                        name="precioOsaina" value="<%=producto.precioOsaina%>">
                 </div>
                 <div class="col-sm">
                     <label>Precio Nuevo</label>
-                    <input type="number" min="0" max="99999" class="form-control" id="txtNuevo" placeholder="Precio Nuevo" name="precioNuevo" value="<%=producto.precioNuevo%>">
+                    <input type="number" min="0" max="99999" class="form-control" id="txtNuevo" placeholder="Precio Nuevo"
+                        name="precioNuevo" value="<%=producto.precioNuevo%>">
                 </div>
                 <div class="col-sm">
                     <label>Costo</label>
-                    <input type="number" min="0" max="99999" class="form-control" id="txtCosto" placeholder="Costo" name="costo" value="<%=producto.costo%>">
+                    <input type="number" min="0" max="99999" class="form-control" id="txtCosto" placeholder="Costo"
+                        name="costo" value="<%=producto.costo%>">
                 </div>
                 <div class="col-sm">
                     <label>Descuento</label>
-                    <input type="number" min="0" max="99" class="form-control" id="txtDescuento" placeholder="Descuento" name="descuento" value="<%=producto.descuento%>">
-                </div> 
+                    <input type="number" min="0" max="99" class="form-control" id="txtDescuento" placeholder="Descuento"
+                        name="descuento" value="<%=producto.descuento%>">
+                </div>
             </div>
-        </div>  
-        <button class="btn btn-primary" type="submit">Guardar</button>        
-    </form>      
+        </div>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </form>
 </div>
 <% include ../partials/_footer %>

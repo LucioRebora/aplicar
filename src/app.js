@@ -14,8 +14,8 @@ const app = express();
 const { url } = require('./config/database.js');
 
 mongoose.connect(url)
-.then(db => console.log('db connected'))
-.catch(err => console.log(err));
+	.then(db => console.log('db connected'))
+	.catch(err => console.log(err));
 
 require('./config/passport')(passport);
 
@@ -37,11 +37,11 @@ app.set('view engine', 'ejs');
 
 // middlewares
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-function isLoggedIn (req, res, next) {
+function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}
@@ -75,5 +75,5 @@ require('./routes/routes.js')(app, passport);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {
-  console.log(`server on port ${app.get('port')}`);
+	console.log(`server on port ${app.get('port')}`);
 });

@@ -3,50 +3,61 @@
 <!--div class="clickcls">Click with on method example</div-->
 
 <div class="container">
-        <div class="row">
-          <!-- LIST -->
-          <div class="col-md-10">
-            <table class="table table-bordered table-hover">
-              <thead>
-                  <tr>
-                    <th>Código</th>
-                    <th>Color</th>
-                    <th>Tamaño</th>
-                    <th>Detalle</th>
-                    <th>Nuevo</th>
-                    <th>Osaina</th>
-                    <th></th>
-                  </tr>
-                </thead>
-              <tbody>
-                <% for(var i=0; i < productos.length; i++) { %>
-                  <tr>
-                    <td><strong><%= productos[i].codigo %></strong></td>
-                    <td><%=productos[i].color%></td>
-                    <td><%=productos[i].tamanio%></td>
-                    <td><%=productos[i].tipo%> <%=productos[i].detalle%></td>
-                    <td><%=productos[i].precioNuevo%></td>
-                    <td><%=productos[i].precioOsaina%></td>
-                    <td>
-                      <a href="/stock/edit/<%= productos[i]._id %>" class="btn btn-warning btn-sm">
-                          Stock
-                      </a>
-                      <a href="/producto/edit/<%= productos[i]._id %>" class="btn btn-info btn-sm">
-                        <span class="glyphicon glyphicon-edit"></span>
-                      </a>
-                      <a href="/producto/delete/<%= productos[i]._id %>"
-                        class="btn btn-danger btn-sm">
-                        <span class="glyphicon glyphicon-trash"></span>
-                      </a>
-                    </td>
-                  </tr>
-                <% } %>
-              </tbody>
-            </table>
-      
-          </div>
-        </div>
-      
-      </div>
+  <div class="row">
+    <!-- LIST -->
+    <div class="col-md-10">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Color</th>
+            <th>Tamaño</th>
+            <th>Detalle</th>
+            <th>Nuevo</th>
+            <th>Osaina</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < productos.length; i++) { %>
+          <tr>
+            <td><strong>
+                <%= productos[i].codigo %></strong></td>
+            <td>
+              <%=productos[i].color%>
+            </td>
+            <td>
+              <%=productos[i].tamanio%>
+            </td>
+            <td>
+              <%=productos[i].tipo%>
+              <%=productos[i].detalle%>
+            </td>
+            <td>
+              <%=productos[i].precioNuevo%>
+            </td>
+            <td>
+              <%=productos[i].precioOsaina%>
+            </td>
+            <td>
+              <a href="/stock/edit/<%= productos[i]._id %>" class="btn btn-warning btn-sm">
+                Stock
+              </a>
+              <a href="/producto/edit/<%= productos[i]._id %>" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-edit"></span>
+              </a>
+              <a href="/producto/delete/<%= productos[i]._id %>" class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>
 
 <% include ../partials/_footer %>

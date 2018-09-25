@@ -1,40 +1,47 @@
 <% include ../partials/_header %>
 
 <div class="container">
-        <div class="row">
-          <!-- LIST -->
-          <div class="col-md-10">
-            <table class="table table-bordered table-hover">
-              <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Fecha</th>
-                    <th>Cliente</th>
-                    <th>Total</th>
-                    <th></th>
-                  </tr>
-                </thead>
-              <tbody>
-                <% for(var i=0; i < ventas.length; i++) { %>
-                  <tr>
-                    <td><strong><%= ventas[i].numero %></strong></td>
-                    <td><%=ventas[i].creacion%></td>
-                    <td><%=ventas[i].cliente%></td>
-                    <td><%=ventas[i].total%></td>
-                    <td>
-                      <a href="/venta/ver/<%= ventas[i]._id %>" class="btn btn-success btn-sm">
-                        <span class="glyphicon glyphicon-paste"></span>
-                      </a>
-                    </td>
-                  </tr>
-                <% } %>
-              </tbody>
-            </table>
-      
-          </div>
-        </div>
-      
-      </div>
+  <div class="row">
+    <!-- LIST -->
+    <div class="col-md-10">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < ventas.length; i++) { %>
+          <tr>
+            <td><strong>
+                <%= ventas[i].numero %></strong></td>
+            <td>
+              <%=ventas[i].creacion%>
+            </td>
+            <td>
+              <%=ventas[i].cliente%>
+            </td>
+            <td>
+              <%=ventas[i].total%>
+            </td>
+            <td>
+              <a href="/venta/ver/<%= ventas[i]._id %>" class="btn btn-success btn-sm">
+                <span class="glyphicon glyphicon-paste"></span>
+              </a>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>
 
 
 <% include ../partials/_footer %>

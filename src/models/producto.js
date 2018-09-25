@@ -12,10 +12,10 @@ const ProductoSchema = Schema({
     precioNuevo: Number,
     costo: Number,
     descuento: Number,
-    alta:  {
+    alta: {
         type: Date,
         default: Date.now
-      }
+    }
 });
 
 module.exports = mongoose.model('productos', ProductoSchema);

@@ -7,7 +7,7 @@ module.exports = (app, passport) => {
 	// index routes
 	app.get('/', (req, res) => {
 		if (req.isAuthenticated())
-			res.render('home',{titulo:'Home'});
+			res.render('home', { titulo: 'Home' });
 		else
 			res.redirect('login');
 	});
@@ -30,8 +30,8 @@ module.exports = (app, passport) => {
 		failureFlash: true
 	}));
 
-	app.get('/auth/google', passport.authenticate('google',{scope: ['profile']}));
-	app.get('/auth/google/callback', passport.authenticate('google',{
+	app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+	app.get('/auth/google/callback', passport.authenticate('google', {
 		successRedirect: '/profile',
 		failureRedirect: '/login'
 	}));
@@ -40,7 +40,7 @@ module.exports = (app, passport) => {
 	app.get('/signup', (req, res) => {
 		res.render('login/signup', {
 			message: req.flash('signupMessage'),
-			titulo:'Usuario'
+			titulo: 'Usuario'
 		});
 	});
 
@@ -48,13 +48,13 @@ module.exports = (app, passport) => {
 		successRedirect: '/profile',
 		failureRedirect: '/signup',
 		failureFlash: true // allow flash messages
-	}));	
+	}));
 
 	//profile view
 	app.get('/profile', isLoggedIn, (req, res) => {
 		res.render('login/profile', {
 			user: req.user,
-			titulo : 'Usuario'
+			titulo: 'Usuario'
 		});
 	});
 
@@ -68,9 +68,9 @@ module.exports = (app, passport) => {
 
 	app.get('/delete/:id', isLoggedIn, async (req, res, next) => {
 		let { id } = req.params;
-		await Usuario.remove({_id: id});
+		await Usuario.remove({ _id: id });
 		res.redirect('/list');
-	  });	
+	});
 
 	// logout
 	app.get('/logout', (req, res) => {
@@ -79,7 +79,7 @@ module.exports = (app, passport) => {
 	});
 };
 
-function isLoggedIn (req, res, next) {
+function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}

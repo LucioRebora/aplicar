@@ -4,16 +4,16 @@ const Schema = mongoose.Schema;
 const VentasSchema = Schema({
     numero: Number,
     estado: String,
-    creada:  {
+    creada: {
         type: Date,
         default: Date.now
-      },
-    modificada:  {
+    },
+    modificada: {
         type: Date,
         default: Date.now
     },
     cliente: String,
-    total : Number  
+    total: Number
 });
 
 module.exports = mongoose.model('ventas', VentasSchema);

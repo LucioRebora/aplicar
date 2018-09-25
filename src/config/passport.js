@@ -22,26 +22,26 @@ module.exports = function (passport) {
     // by default, local strategy uses username and password, we will override with email
     usernameField: 'email',
     passwordField: 'password',
-    passReqToCallback : true // allows us to pass back the entire request to the callback
+    passReqToCallback: true // allows us to pass back the entire request to the callback
   },
-  function (req, email, password, done) {
-    User.findOne({'local.email': email}, function (err, user) {
-      if (err) {
-        return done(err);
-      }
-      if (user) {
-        return done(null, false, req.flash('signupMessage', 'El mail ya existe'));
-      } else {
-        var newUser = new User();
-        newUser.local.email = email;
-        newUser.local.password = newUser.generateHash(password);
-        newUser.save(function (err) {
-          if (err) { throw err; }
-          return done(null, newUser);
-        });
-      }
-    });
-  }));
+    function (req, email, password, done) {
+      User.findOne({ 'local.email': email }, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (user) {
+          return done(null, false, req.flash('signupMessage', 'El mail ya existe'));
+        } else {
+          var newUser = new User();
+          newUser.local.email = email;
+          newUser.local.password = newUser.generateHash(password);
+          newUser.save(function (err) {
+            if (err) { throw err; }
+            return done(null, newUser);
+          });
+        }
+      });
+    }));
 
   // login
   // we are using named strategies since we have one for login and one for signup
@@ -51,52 +51,52 @@ module.exports = function (passport) {
     passwordField: 'password',
     passReqToCallback: true
   },
-  function (req, email, password, done) {
-    User.findOne({'local.email': email}, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, req.flash('loginMessage', 'Email no registrado'))
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, req.flash('loginMessage', 'Password Incorrecto'));
-      }
-      req.session.email = email;
-      return done(null, user);
-    });
-  }));
+    function (req, email, password, done) {
+      User.findOne({ 'local.email': email }, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) {
+          return done(null, false, req.flash('loginMessage', 'Email no registrado'))
+        }
+        if (!user.validPassword(password)) {
+          return done(null, false, req.flash('loginMessage', 'Password Incorrecto'));
+        }
+        req.session.email = email;
+        return done(null, user);
+      });
+    }));
 
   passport.use(new GoogleStrategy({
     callbackURL: '/home',
     clientID: keys.google.clientId,
     clientSecret: keys.google.clientSecret
   },
-  function(accessToken, refreshToken, profiel, done){
-    process.nextTick(function(){
-      User.findOne({'google.id':profile.id}, function(err, user){
-        if(err)
-          return done(err);
-        if(user)
-         return done(null, user);
-        else{
-          var newUser = new User();
-          newUser.google.id = profile.id;
-          newUser.google.token = accessToken;
-          //newUser.google.name = 'Nom';
-          newUser.google.email = profile.emails[0].value;
+    function (accessToken, refreshToken, profiel, done) {
+      process.nextTick(function () {
+        User.findOne({ 'google.id': profile.id }, function (err, user) {
+          if (err)
+            return done(err);
+          if (user)
+            return done(null, user);
+          else {
+            var newUser = new User();
+            newUser.google.id = profile.id;
+            newUser.google.token = accessToken;
+            //newUser.google.name = 'Nom';
+            newUser.google.email = profile.emails[0].value;
 
-          newUser.save(function(err){
-            if(err)
-              throw err;
-            return done(null, newUser);
-          })
-          console.log(profile);
-        }   
+            newUser.save(function (err) {
+              if (err)
+                throw err;
+              return done(null, newUser);
+            })
+            console.log(profile);
+          }
+        }
+
+        )
       }
 
       )
     }
-
-    )
-  }
-));
+  ));
 }

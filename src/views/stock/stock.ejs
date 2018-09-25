@@ -1,51 +1,55 @@
 <% include ../partials/_header %>
 
 <div class="container">
-        <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h3 class="card-title"> Producto</h3>
-                    <p>
-                      <strong>Código</strong> : <%=producto.codigo %> <br>
-                      <strong>Detalle</strong> : <%=producto.tipo %> <%= producto.detalle %><br>
-                    </p>
-                  </div>
-                </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title"> Producto</h3>
+                <p>
+                    <strong>Código</strong> :
+                    <%=producto.codigo %> <br>
+                    <strong>Detalle</strong> :
+                    <%=producto.tipo %>
+                    <%= producto.detalle %><br>
+                </p>
             </div>
-        </div>         
+        </div>
+    </div>
+</div>
 </div>
 <br>
 <div class="container">
     <div class="col-sm-12">
-            <form action=
-              "/stock/edit/<%= producto.codigo %>" 
-            method="post">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <% for(var i=0; i < talles.length; i++) { %>
-                                <th><%=talles[i].talle%></th>
-                                <%}%>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <% for(var i=0; i < talles.length; i++) { %>
-                                <td>
-                                    <div class="form-group">
-                                        <input class="form-control" type="number" min="0" max="99999" name="<%=talles[i].talle%>" value="<%=talles[i].cantidad%>">
-                                    </div>
-                                </td>
-                                <%}%>
-                            </tr>
-                      </tbody>
-                    </table>
-                    <button class="btn btn-success" type="submit">
-                        Guardar
-                    </button>
-                    <a href="/producto/list" class="btn btn-info" role="button" aria-disabled="true">Volver</a>
-                  </div>
-                </form>
-    </div>         
+        <form action="/stock/edit/<%= producto.codigo %>" method="post">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <% for(var i=0; i < talles.length; i++) { %>
+                        <th>
+                            <%=talles[i].talle%>
+                        </th>
+                        <%}%>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <% for(var i=0; i < talles.length; i++) { %>
+                        <td>
+                            <div class="form-group">
+                                <input class="form-control" type="number" min="0" max="99999" name="<%=talles[i].talle%>"
+                                    value="<%=talles[i].cantidad%>">
+                            </div>
+                        </td>
+                        <%}%>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success" type="submit">
+                Guardar
+            </button>
+            <a href="/producto/list" class="btn btn-info" role="button" aria-disabled="true">Volver</a>
+    </div>
+    </form>
+</div>
 </div>
 <% include ../partials/_footer %>
