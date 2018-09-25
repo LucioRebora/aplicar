@@ -1,0 +1,36 @@
+<% include ../partials/_header %>
+
+<div class="container">
+    <header class="text-center">
+        <h4><span class="fa fa-user fa-lg"></span> Nuevo Usuario</h4>
+    </header>
+    <div class="container">
+            <div class="col-6 mx-auto">
+                <div class="card mt-5">
+                    <div class="card-body">
+                    <!-- form -->
+                        <form action="/signup" method="post">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                    <button type="submit" class="btn btn-primary  btn-lg login-btn">Crear</button>
+                            </div>
+                        </form>
+                        <% if (message.length > 0) { %>
+                            <div class="alert alert-danger">
+                                <%= message %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>      
+</div>
+<% include ../partials/_footer %>  

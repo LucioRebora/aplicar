@@ -1,0 +1,82 @@
+<% include ../partials/_header %>
+
+<div class="container">
+          <!-- LIST -->
+          <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+              <tbody>
+                <% for(var i=0; i < stocks.length; i++) { %>
+                  <tr>
+                    <td><strong><%= stocks[i].stock %></strong></td>
+                    <td>
+                      <a href="/stock/edit/<%= tipos[i]._id %>" class="btn btn-info">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a href="/stock/delete/<%= tipos[i]._id %>"
+                        class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </a>
+                    </td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+      
+          </div>
+        </div>
+      
+      </div>
+
+      <div class="container">
+
+        <div class="row">
+          <!-- LIST -->
+          <div class="col-md-7">
+              
+            <form action=""
+              method="post">
+
+            <table class="table table-bordered table-hover">
+              <tbody>
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Detalle</th>
+                      <% for(var j=0; j < talles.length; j++) { %>
+                            <th><%=talles[j].talle%></th>
+                      <%}%>
+                    <th></th>
+                  </tr>
+                </thead>
+                <% for(var i=0; i < productos.length; i++) { %>
+                  <tr>
+                    <td><strong><%= productos[i].codigo %></strong></td>
+                    <td><%=productos[i].tipo%> <%=productos[i].detalle%></td>
+                    <% for(var j=0; j < talles.length; j++) { %>
+
+                      <td>
+                      <div class="form-group">
+                          <input class="form-control" type="text" name="prod:<%=productos[i]._id%>,tall:<%=talles[j]._id%>" value="">
+                        </div>
+                      </td>
+                   
+                    <%}%>
+                    <td>
+                      <a href="/producto/edit/<%= productos[i]._id %>" class="btn btn-info">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a href="/producto/delete/<%= productos[i]._id %>"
+                        class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </a>
+                    </td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+      
+          </div>
+        </div>
+      
+      </div>
+<% include ../partials/_footer %>

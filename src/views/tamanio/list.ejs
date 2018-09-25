@@ -1,0 +1,53 @@
+<% include ../partials/_header %>
+
+<div class="container">
+
+        <div class="row">
+          <!--FORM-->
+          <div class="col-md-5">
+            <div class="card">
+              <div class="card-body">
+                <form action=
+                <% if(tamanio.tamanio != null && tamanio.tamanio.length > 0) {%>
+                  "/tamanio/edit/<%= tamanio._id %>" 
+                <%}else{%>
+                  "/tamanio/add" 
+                <%}%>
+                method="post">
+                  <div class="form-group">
+                    <input class="form-control" type="text" name="tamanio" placeholder="Tamaño" value="<%=tamanio.tamanio%>">
+                  </div>
+                  <button class="btn btn-primary" type="submit">
+                    Agregar
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+      
+          <!-- LIST -->
+          <div class="col-md-4">
+            <table class="table table-bordered table-hover">
+              <tbody>
+                <% for(var i=0; i < tamanios.length; i++) { %>
+                  <tr>
+                    <td><strong><%= tamanios[i].tamanio %></strong></td>
+                    <td>
+                      <a href="/tamanio/edit/<%= tamanios[i]._id %>" class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a href="/tamanio/delete/<%= tamanios[i]._id %>"
+                        class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </a>
+                    </td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+      
+          </div>
+        </div>
+      </div>
+
+<% include ../partials/_footer %>

@@ -1,0 +1,90 @@
+<% include ../partials/_header %>
+
+<div class="container">
+        <header class="text-center">
+                <h3>Venta
+
+                <%if(venta.numero > 0 ) {%>        
+                        :  <b><%=venta.numero%></b>
+                <%}%>
+                </h3>
+        </header>
+        <form action="/venta/add" method="post">
+                <div class="form-group">
+                        <div class="row">
+                                <div class="col-sm-4">
+                                        <label><span class="glyphicon glyphicon-user"></span> Cliente</label>
+                                        <%if(venta.length < 1 ) {%>
+                                                <input type="text" class="form-control" name="cliente" placeholder="Cliente" value="<%=venta.cliente%>">
+                                        <%}else{%>
+                                                <h5><%=venta.cliente%></h5>
+                                        <%}%>
+                                </div>
+                                <div class="col-sm-5">
+                                </div>
+                                <div class="col-sm-3">
+                                        <%if(venta.length < 1 ) {%>
+                                        <label><span class="glyphicon glyphicon-hand-right"></span> Producto</label>
+                                        <input id="nbuscar" autocomplete="off" type="text" class="form-control" placeholder="Buscar productos" value="">
+                                        <%}else{%>
+                                        <label>Fecha de Venta &nbsp;<span class="glyphicon glyphicon-calendar"></span></label>
+                                        <h5 id="creacion"><%=venta.creacion%></h5>
+                                        <%}%>
+                                <div style="z-index:1; position: fixed;" class="prod-container"></div>
+                                </div>
+                        </div>
+                </div>
+                <div class="form-group">
+                        <div class="row">                
+                                <div id ="dTabla" 
+                                <%if(detalle.length < 1 ) {%> 
+                                        style="display : none;" 
+                                <%}%> 
+                                class="col-md-12">
+                                        <table class="tablaProductos table table-bordered">
+                                        <tr style="font-size: 9px; background-color: #FFEFD5;">
+                                                <td width="10%">Código</td>
+                                                <td>Detalle</td>
+                                                <td width="10%">Talle</td>
+                                                <td width="10%">Cantidad</td>
+                                                <td width="20%">Precio</td>
+                                                <td width="5%"></td>
+                                        </tr>
+                                        <% for(var i = 0; i < detalle.length; i++){%> 
+                                                <tr class="dato">
+                                                <td><%=detalle[i].codigo%></td>
+                                                <td><%=detalle[i].detalle%></td>
+                                                <td><%=detalle[i].talle%></td>
+                                                <td><%=detalle[i].cantidad%></td>
+                                                <td><%=detalle[i].precio%></td>
+                                                <td><input type="hidden" name="codigo" value="<%=detalle[i].codigo%>">
+                                                        <!--a href="#" class="btn">
+                                                <span class="glyphicon glyphicon-minus-sign"></span></a--></td></tr>       
+                                        <%}%> 
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+                <div class="form-group">
+                        <div class="row">
+                                <div id ="dTotal"
+                                <%if(venta.length < 1 ) {%> 
+                                        style="display : none;" 
+                                <%}%>
+                                class="col-sm-2">
+                                        <div class="input-group">
+                                        <div class="input-group-addon">$</div>
+                                                <input id="total" value="<%=venta.total%>" name="total" readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Total">
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <button id ="dFinalizar" 
+                 
+                        style="display : none;" 
+                  
+                class="btn btn-primary" type="submit">Finalizar</button>        
+        </form>         
+</div>
+
+<% include ../partials/_footer %>
