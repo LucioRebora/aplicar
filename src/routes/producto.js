@@ -4,6 +4,8 @@ const Tamanios = require('../models/tamanio');
 const Colores = require('../models/color');
 const Tipos = require('../models/tipo');
 const Producto = require('../models/producto');
+const Talle = require('../models/talle');
+const Stocks = require('../models/stock');
 const dateformat = require('dateformat');
 
 router.get('/nuevo', async (req, res) => {
@@ -86,6 +88,50 @@ router.post('/buscar/pid', async (req, res, next) => {
     const { prod } = req.body;
     const producto = await Producto.findById(prod);
     res.send(producto);
+});
+
+router.get('/productoStock', async (req, res, next) => {
+    const productos = await Producto.find().sort({ "codigo": 1 });
+    const tipos = await Tipos.find();
+    const tamanios = await Tamanios.find();
+    const colores = await Colores.find();
+    var talles = await Talle.find().sort({ "talle": 1 });
+
+    for (var i = 0; i < productos.length; i++) {
+        
+        for (var k = 0; k < tamanios.length; k++) {
+            if (productos[i].tamanioId == tamanios[k]._id) {
+                productos[i].tamanio = tamanios[k].tamanio;
+                break;
+            }
+        }
+        
+        for (var j = 0; j < tipos.length; j++) {
+            if (productos[i].tipoId == tipos[j]._id) {
+                productos[i].tipo = tipos[j].tipo;
+                break;
+            }
+        }
+
+        for (var l = 0; l < colores.length; l++) {
+            if (productos[i].colorId == colores[l]._id) {
+                productos[i].color = colores[l].color;
+                break;
+            }
+        }
+        
+        const cant = new Array();
+        for (var m = 0; m < talles.length; m++) {
+            const stk = await Stocks.find({ codigo: productos[i].codigo, talle: talles[m].talle });
+            if (stk != '') {
+                cant[m] = stk[0].cantidad;
+            }else{
+                cant[m] = '';
+            }
+        }
+        productos[i].cant = cant;
+    }
+    res.render('producto/productoStock', { productos,talles, titulo: 'Productos Stock' });
 });
 
 function getTipoDesc(clave, list) {

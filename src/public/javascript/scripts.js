@@ -110,7 +110,7 @@ $(document).ready(function () {
 
     function getTotal() {
         var total = 0;
-        $('.tablaProductos tr.dato').each(function () { //filas con clase 'dato', especifica una clase, asi no tomas el nombre de las columnas
+        $('.tablaProductos tr.dato').each(function () { 
             var cant = Number($(this).find("td:eq(3) > input").val());
             var costo = Number($(this).find("td:eq(4) > input").val());
             total = total + (cant * costo);
@@ -144,5 +144,20 @@ $(document).ready(function () {
         });
         return res;
     };
+
+    $("#dFinalizar").on("click",function(){
+        var valido = true;
+        if($("#dCliente").val() == ''){
+            alert('Ingrese el cliente');
+            valido = false;
+        }
+        $('.tablaProductos tr.dato').each(function () { 
+            if($(this).find("td:eq(2) > select").val() == null){
+                alert('Hay productos seleccionados sin stock');
+                valido = false;
+            }
+        })
+        return valido;  
+    });
 });
 

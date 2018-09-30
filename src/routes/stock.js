@@ -40,7 +40,7 @@ router.post('/edit/:codigo', async (req, res, next) => {
             }
         }
     }
-    res.redirect('/producto/list');
+    res.redirect('/producto/productoStock');
 });
 
 router.post('/buscar/pid', async (req, res, next) => {

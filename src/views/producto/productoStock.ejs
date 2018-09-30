@@ -1,0 +1,53 @@
+<% include ../partials/_header %>
+
+<!--div class="clickcls">Click with on method example</div-->
+
+<div class="container">
+  <div class="row">
+    <!-- LIST -->
+    <div class="col-md-10">
+      <table class="table table-bordered table-hover">
+        <thead  style="background-color: #FFEFD5;"">
+          <tr>
+            <th>Código</th>
+            <th>Detalle</th>
+            <th>Precio</th>
+            <% for(var i=0; i < talles.length; i++) { %>
+            <th>
+              <%=talles[i].talle%>
+            </th>
+            <%}%>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < productos.length; i++) { %>
+          <tr>
+            <td><strong>
+                <a href="/stock/edit/<%= productos[i]._id %>">
+                  <%= productos[i].codigo %></strong>
+                </a>
+            </td>
+            <td>
+              <%=productos[i].tipo%>
+              <%=productos[i].color%>
+              <%=productos[i].detalle%>
+            </td>
+            <td><strong>
+              $ <%=productos[i].precioOsaina%></strong>
+            </td>
+            <% for(var j=0; j < (productos[i].cant).length; j++) { %>
+            <td>
+              <%=productos[i].cant[j]%>
+            </td>
+            <%}%>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+
+<% include ../partials/_footer %>
